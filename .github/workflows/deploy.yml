@@ -20,7 +20,7 @@ jobs:
 
     - name: Upgrade npm
       run: npm install -g npm@latest
-            
+
     - name: Clear npm cache
       run: npm cache clean --force
 
@@ -28,30 +28,31 @@ jobs:
       run: npm install -g yarn
 
     - name: Deploy to EC2
-      uses: appleboy/ssh-action@v0.1.10    
-      env:
-        HOST: ${{ secrets.EC2_HOST }}
-        USERNAME: ${{ secrets.EC2_USER }}
-        SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.EC2_HOST }}
+        username: ${{ secrets.EC2_USER }}
+        key: ${{ secrets.EC2_SSH_KEY }}
+        port: 22
         script: |
-          ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_PUBLIC_IP }} << 'EOF'
-            sudo apt-get update -y
-            sudo apt-get install -y nodejs npm git
-            git clone https://github.com/priyanka-1994/Task-2-Pearthought-StrapiApp.git
-            cd /home/ubuntu/Task-2-Pearthought-StrapiApp
-            yarn install
-            cd priya-strapi-app-task-2
-            yarn build
-            yarn install
-            yarn develop
-          EOF
+          sudo apt-get update -y
+          sudo apt-get install -y nodejs npm git
+          sudo npm install -g yarn
+          if [ ! -d "/home/${{ secrets.EC2_USER }}/Task-2-Pearthought-StrapiApp" ]; then
+            git clone https://github.com/priyanka-1994/Task-2-Pearthought-StrapiApp.git /home/${{ secrets.EC2_USER }}/Task-2-Pearthought-StrapiApp
+          else
+            cd /home/${{ secrets.EC2_USER }}/Task-2-Pearthought-StrapiApp && git pull
+          fi
+          cd /home/${{ secrets.EC2_USER }}/Task-2-Pearthought-StrapiApp/priya-strapi-app-task-2
+          yarn install
+          yarn build
+          yarn develop
 
     - name: Success
       if: success()
-      run: echo "Deployment successfull!"
+      run: echo "Deployment successful!"
 
     - name: Alerting About Failure
       if: failure()
-      run: echo "Deployment failed!"      
-    
+      run: echo "Deployment failed!"
 
