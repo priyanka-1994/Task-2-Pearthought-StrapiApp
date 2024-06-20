@@ -47,12 +47,11 @@ jobs:
           cd /home/${{ secrets.EC2_USER }}/Task-2-Pearthought-StrapiApp
           ls
           cd priya-strapi-app-task-2
+          
           yarn install
           npm run build
           
-          yarn build
-          yarn develop
-
+          
     - name: Success
       if: success()
       run: echo "Deployment successful!"
