@@ -45,11 +45,6 @@ jobs:
           fi
 
           cd /home/${{ secrets.EC2_USER }}/Task-2-Pearthought-StrapiApp
-          yarn install
-
-          cd /home/${{ secrets.EC2_USER }}/Task-2-Pearthought-StrapiApp/priya-strapi-app-task-2
-          
-          yarn install
           npm run build
           
           
