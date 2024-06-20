@@ -45,7 +45,8 @@ jobs:
           fi
 
           cd /home/${{ secrets.EC2_USER }}/Task-2-Pearthought-StrapiApp
-          npm run build
+          npm install
+          
           
           
     - name: Success
