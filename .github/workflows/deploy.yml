@@ -44,6 +44,7 @@ jobs:
           else
             cd $REPO_DIR && git pull
           fi
+          npm install strapi@beta -g
           cd $REPO_DIR
           yarn install
           yarn build
