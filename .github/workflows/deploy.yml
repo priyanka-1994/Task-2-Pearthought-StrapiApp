@@ -43,8 +43,9 @@ jobs:
           else
             cd /home/${{ secrets.EC2_USER }}/Task-2-Pearthought-StrapiApp && git pull
           fi
-          cd /home/${{ secrets.EC2_USER }}/Task-2-Pearthought-StrapiApp/priya-strapi-app-task-2
+          cd /home/${{ secrets.EC2_USER }}/Task-2-Pearthought-StrapiApp
           yarn install
+          cd priya-strapi-app-task-2
           yarn build
           yarn develop
 
