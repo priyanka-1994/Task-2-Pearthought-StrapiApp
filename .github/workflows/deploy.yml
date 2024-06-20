@@ -39,13 +39,12 @@ jobs:
           sudo apt-get install -y nodejs npm git
           sudo npm install -g yarn
           REPO_DIR="/home/${{ secrets.EC2_USER }}/Task-2-Pearthought-StrapiApp"
-          APP_DIR="$REPO_DIR/priya-strapi-app-task-2"
           if [ ! -d "$REPO_DIR" ]; then
             git clone https://github.com/priyanka-1994/Task-2-Pearthought-StrapiApp.git $REPO_DIR
           else
             cd $REPO_DIR && git pull
           fi
-          cd $APP_DIR
+          cd $REPO_DIR
           yarn install
           yarn build
           yarn develop
