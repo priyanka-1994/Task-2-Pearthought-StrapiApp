@@ -27,9 +27,6 @@ jobs:
     - name: Install Yarn
       run: npm install -g yarn
 
-    - name: Install dependencies
-      run: yarn install
-
     - name: Deploy to EC2
       uses: appleboy/ssh-action@v0.1.10    
       env:
