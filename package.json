@@ -75,8 +75,9 @@
     "test:unit:all": "nx run-many --target=test:unit --nx-ignore-cycles",
     "test:unit:watch": "run test:unit --watch",
     "test:unit": "nx run-many --target=test:unit --nx-ignore-cycles",
-    "lint": "nx run-many --target=lint --nx-ignore-cycles"
-    "start": "strapi start"
+    "lint": "nx run-many --target=lint --nx-ignore-cycles",
+    "start": "strapi start",
+    "develop": "strapi develop"
   },
   "resolutions": {
     "@strapi/design-system": "1.20.0-typescript.0",
