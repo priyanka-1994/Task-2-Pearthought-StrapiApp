@@ -62,7 +62,7 @@ jobs:
            
             # Build the application (if a build script is defined)
             if [ -f "package.json" ] && grep -q '"build":' package.json; then
-              yarn install && yarn clean cache && yarn run build
+              yarn install && yarn upgrade && yarn clean cache && yarn run build
             else
               echo "No build script found in package.json"
             fi
