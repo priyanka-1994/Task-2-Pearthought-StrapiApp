@@ -154,7 +154,7 @@
     "npm": "^10.7.0",
     "@strapi/strapi": "*",
     "@strapi/utils": "latest",
-    "yarn": "4.0.1"
+    "yarn": "latest"
   },
    "dependencies": {
     "@strapi/utils": "latest"
