@@ -170,7 +170,8 @@
    "dependencies": {
     "@strapi/utils": "latest",
     "@strapi/helper-plugin": "latest", 
-    "@strapi/admin": "latest"
+    "@strapi/admin": "latest",
+    "@strapi/plugin-cloud": "latest"
    },
   "packageManager": "yarn@4.0.1",
   "engines": {
