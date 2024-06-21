@@ -171,8 +171,9 @@
     "@strapi/utils": "latest",
     "@strapi/helper-plugin": "latest", 
     "@strapi/admin": "latest",
-    "@strapi/plugin-cloud": "latest"
-   },
+    "@strapi/plugin-cloud": "latest",
+    "@strapi/plugin-cloud-build":"latest"
+ },
   "packageManager": "yarn@4.0.1",
   "engines": {
     "node": ">=18.0.0 <=20.x.x",
