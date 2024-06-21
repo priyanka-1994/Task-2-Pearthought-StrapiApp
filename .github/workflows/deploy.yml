@@ -21,9 +21,6 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build Strapi application
-        run: npm run build
-
       - name: Start Strapi application
         run: npm run start
 
