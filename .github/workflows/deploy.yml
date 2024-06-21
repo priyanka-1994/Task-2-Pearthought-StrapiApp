@@ -22,8 +22,13 @@ jobs:
       - name: Install Yarn
         run: npm install -g yarn
 
-      - name: Install dependencies
-        run: yarn install --immutable
+      # Step 4: Install dependencies
+      - name: Install dependencies with Yarn
+        run: |
+          yarn cache clean
+          rm -rf yarn.lock node_modules
+          yarn install
+
 
       # Step 4: Build Strapi application (if necessary)
       # Adjust this step based on your Strapi setup, if a build step is required
