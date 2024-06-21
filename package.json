@@ -157,8 +157,8 @@
     "yarn": "latest"
   },
    "dependencies": {
-    "@strapi/utils": "latest"
-    
+    "@strapi/utils": "latest",
+    "@strapi/helper-plugin": "latest"    
    },
   "packageManager": "yarn@4.0.1",
   "engines": {
