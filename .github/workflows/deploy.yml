@@ -28,7 +28,7 @@ jobs:
       # Adjust this step based on your Strapi setup, if a build step is required
       - name: Build Strapi application
         run: |
-          yarn build  # Replace with actual build command if needed
+          npm run build  # Replace with actual build command if needed
         
 
       # Step 5: Start Strapi application
