@@ -165,15 +165,13 @@
     "@strapi/utils": "latest",
     "yarn": "latest",
     "@strapi/helper-plugin": "latest",
-    "@strapi/admin": "latest",
-    "@strapi/plugin-cloud-build@npm":"latest"
+    "@strapi/admin": "latest"
   },
    "dependencies": {
     "@strapi/utils": "latest",
     "@strapi/helper-plugin": "latest", 
     "@strapi/admin": "latest",
-    "@strapi/plugin-cloud": "1.0.0",
-    "@strapi/plugin-cloud-build@npm":"latest"
+    "@strapi/plugin-cloud": "1.0.0"
  },
   "packageManager": "yarn@4.0.1",
   "engines": {
