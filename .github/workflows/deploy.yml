@@ -57,7 +57,14 @@ jobs:
             # Install dependencies and build (adjust as per your project's setup)
             yarn install
             yarn cache clean
-            yarn install --force
+           
+            # Build the application (if a build script is defined)
+            if [ -f "package.json" ] && grep -q '"build":' package.json; then
+              yarn run build
+            else
+              echo "No build script found in package.json"
+            fi
+            
             yarn build
 
       # Step 5: Display application URL
