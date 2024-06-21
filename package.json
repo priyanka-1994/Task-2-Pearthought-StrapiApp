@@ -155,11 +155,13 @@
     "@strapi/strapi": "*",
     "@strapi/utils": "latest",
     "yarn": "latest",
-    "@strapi/helper-plugin": "latest"
+    "@strapi/helper-plugin": "latest",
+    "@strapi/admin": "latest"
   },
    "dependencies": {
     "@strapi/utils": "latest",
-    "@strapi/helper-plugin": "latest"    
+    "@strapi/helper-plugin": "latest", 
+    "@strapi/admin": "latest"
    },
   "packageManager": "yarn@4.0.1",
   "engines": {
