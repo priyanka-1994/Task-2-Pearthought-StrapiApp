@@ -51,7 +51,7 @@ jobs:
               git reset --hard origin/main  # Reset to main branch
               git pull origin main
             fi
-
+      
             cd $REPO_DIR
 
             # Install dependencies and build (adjust as per your project's setup)
@@ -69,5 +69,8 @@ jobs:
       # Step 5: Display application URL
       - name: Display application URL
         run: |
-          echo "Application is now running at http://$(host -I | cut -d' ' -f1):1337"
+          # Find the IP address
+          IP_ADDRESS=$(curl -s http://checkip.amazonaws.com)
+          echo "Application is now running at http://${IP_ADDRESS}:1337"
+
 
