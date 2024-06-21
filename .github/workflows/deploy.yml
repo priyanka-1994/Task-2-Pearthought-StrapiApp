@@ -69,9 +69,8 @@ jobs:
             fi
 
             # Create and start Strapi app
-            yarn create strapi-app pearlthought-proj --quickstart
-            cd pearlthought-proj
-            yarn develop
+            pm2 start npm --name "strapi" -- run start
+            pm2 save
           
 
       # Step 5: Display application URL And 
