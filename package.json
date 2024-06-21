@@ -77,7 +77,10 @@
   },
   "resolutions": {
     "@strapi/design-system": "1.20.0-typescript.0",
-    "@types/koa": "2.13.4"
+    "@types/koa": "2.13.4",
+    "@types/react": "^18.2.39",
+    "@types/scheduler": "^0.21.6",
+    "@types/markdown-it": "^12.0.11"
 
   },
   "devDependencies": {
@@ -153,12 +156,46 @@
     "@strapi/utils": "latest"
   },
    "dependencies": {
-    "@strapi/utils": "latest"
-  },
+    "@strapi/utils": "latest",
+    "@strapi/back-end": "workspace:*",
+    "@strapi/docs": "workspace:*",
+    "@strapi/front-end": "workspace:*",
+    "@strapi/generator-docs": "workspace:*",
+    "@strapi/plugin-admin": "workspace:*",
+    "@strapi/plugin-ckeditor": "workspace:*",
+    "@strapi/plugin-content-manager": "workspace:*",
+    "@strapi/plugin-content-type-builder": "workspace:*",
+    "@strapi/plugin-documentation": "workspace:*",
+    "@strapi/plugin-email": "workspace:*",
+    "@strapi/plugin-graphql": "workspace:*",
+    "@strapi/plugin-i18n": "workspace:*",
+    "@strapi/plugin-logging": "workspace:*",
+    "@strapi/plugin-upload": "workspace:*",
+    "@strapi/plugin-users-permissions": "workspace:*",
+    "@strapi/server": "workspace:*",
+    "@strapi/strapi": "workspace:*",
+    "@strapi/testing": "workspace:*",
+    "@strapi/ui": "workspace:*",
+    "@strapi/utils": "workspace:*",
+    "@strapi/utils-connector": "workspace:*",
+    "dotenv-expand": "6.0.0",
+    "eslint-plugin-lodash": "^8.0.0",
+    "eslint-plugin-react-redux": "^5.1.0",
+    "jest-circus": "29.6.0",
+    "jest-runner-eslint": "0.8.2",
+    "npm-run-all": "4.1.5",
+    "readdirp": "5.2.1",
+    "rimraf": "3.0.2"
+   },
   "packageManager": "yarn@4.0.1",
   "engines": {
     "node": ">=18.0.0 <=20.x.x",
     "npm": ">=6.0.0"
+  },
+  "husky": {
+   "hooks": {
+     "pre-commit": "lint-staged"
+   }
   },
   "isStrapiMonorepo": true
 }
