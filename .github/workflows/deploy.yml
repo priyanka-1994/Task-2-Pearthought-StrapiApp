@@ -60,12 +60,11 @@ jobs:
            
             # Build the application (if a build script is defined)
             if [ -f "package.json" ] && grep -q '"build":' package.json; then
-              yarn run build
+              yarn install && yarn clean cache && yarn run build
             else
               echo "No build script found in package.json"
             fi
-            
-            yarn build
+          
 
       # Step 5: Display application URL
       - name: Display application URL
