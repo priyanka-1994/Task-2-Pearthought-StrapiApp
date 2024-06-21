@@ -148,7 +148,7 @@
     "ts-jest": "29.1.0",
     "typescript": "5.2.2",
     "yargs": "17.7.2",
-    "npm": "^10.7.0"
+    "npm": "^10.7.0",
     "@strapi/strapi": "*"
   },
    "dependencies": {
