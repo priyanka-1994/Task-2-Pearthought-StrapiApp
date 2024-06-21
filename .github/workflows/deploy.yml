@@ -1,4 +1,4 @@
-name: Deploying Strapi App on EC2 Using Github Action
+name: Deploy Strapi Application
 
 on:
   push:
@@ -10,51 +10,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '18'
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
 
-    - name: Upgrade npm
-      run: npm install -g npm@latest
+      - name: Install dependencies
+        run: npm install
 
-    - name: Clear npm cache
-      run: npm cache clean --force
+      - name: Build Strapi application
+        run: npm run build
 
-    - name: Install Yarn
-      run: npm install -g yarn
+      - name: Start Strapi application
+        run: npm run start
 
-    - name: Deploy to EC2
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.EC2_HOST }}
-        username: ${{ secrets.EC2_USER }}
-        key: ${{ secrets.EC2_SSH_KEY }}
-        port: 22
-        script: |
-          sudo apt-get update -y
-          sudo apt-get install -y nodejs npm git
-          sudo npm install -g yarn
-          REPO_DIR="/home/${{ secrets.EC2_USER }}/Task-2-Pearthought-StrapiApp"
-          if [ ! -d "$REPO_DIR" ]; then
-            git clone https://github.com/priyanka-1994/Task-2-Pearthought-StrapiApp.git $REPO_DIR
-          else
-            cd $REPO_DIR && git pull
-          fi
-          npm install strapi@beta -g
-          cd $REPO_DIR
-          yarn install
-          yarn build
-          yarn develop
+      - name: Wait for Strapi to start
+        run: sleep 30  # Adjust wait time as needed
 
-    - name: Success
-      if: success()
-      run: echo "Deployment successful!"
-
-    - name: Alerting About Failure
-      if: failure()
-      run: echo "Deployment failed!"
+      - name: Display Strapi application URL
+        run: echo "Strapi application is now running at http://$(hostname -I | cut -d' ' -f1):1337"
 
