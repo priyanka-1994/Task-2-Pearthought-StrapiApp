@@ -20,7 +20,7 @@ jobs:
       - name: Setup Node.js and npm
         uses: actions/setup-node@v2
         with:
-          node-version: '14'  # Adjust to your Node.js version
+          node-version: '18'  # Adjust to your Node.js version
           npm: 'latest'
 
       # Step 3: Install Yarn
@@ -40,7 +40,7 @@ jobs:
           script: |
             sudo apt-get update -y
             sudo apt-get install -y nodejs npm git
-            sudo npm install -g yarn@4.0.1
+            # sudo npm install -g yarn@4.0.1
             
             REPO_DIR="/home/${{ secrets.EC2_USER }}/Task-2-Pearthought-StrapiApp"
             
