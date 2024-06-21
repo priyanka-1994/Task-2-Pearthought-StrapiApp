@@ -23,7 +23,7 @@ jobs:
         run: npm install -g yarn
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install --immutable
 
       # Step 4: Build Strapi application (if necessary)
       # Adjust this step based on your Strapi setup, if a build step is required
