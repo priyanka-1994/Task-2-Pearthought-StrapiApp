@@ -165,8 +165,7 @@
     "@strapi/utils": "latest",
     "yarn": "latest",
     "@strapi/helper-plugin": "latest",
-    "@strapi/admin": "latest",
-    "@strapi/plugin-cloud": "1.0.0"
+    "@strapi/admin": "latest"
   },
    "dependencies": {
      "@strapi/utils": "latest",
