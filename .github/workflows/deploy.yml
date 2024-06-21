@@ -69,5 +69,5 @@ jobs:
       # Step 5: Display application URL
       - name: Display application URL
         run: |
-          echo "Application is now running at http://$(hostname -I | cut -d' ' -f1):1337"
+          echo "Application is now running at http://$(host -I | cut -d' ' -f1):1337"
 
