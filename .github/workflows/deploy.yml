@@ -10,23 +10,40 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Checkout the repository
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Install Node.js
+      # Step 2: Install Node.js and Yarn
+      - name: Setup Node.js and Yarn
         uses: actions/setup-node@v2
         with:
           node-version: '14'
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'yarn'
 
+      # Step 3: Install dependencies with Yarn
       - name: Install dependencies
-        run: npm install
+        run: |
+          cd Task-2-Pearthought-StrapiApp  # Adjust if your repo has a different folder structure
+          yarn install --frozen-lockfile
 
+      # Step 4: Build Strapi application (if necessary)
+      # Adjust this step based on your Strapi setup, if a build step is required
+      - name: Build Strapi application
+        run: |
+          cd Task-2-Pearthought-StrapiApp  # Adjust if your repo has a different folder structure
+          # Replace with actual build command if needed
+          yarn build
+
+      # Step 5: Start Strapi application
       - name: Start Strapi application
-        run: npm run start
+        run: |
+          cd Task-2-Pearthought-StrapiApp  # Adjust if your repo has a different folder structure
+          yarn start &
 
-      - name: Wait for Strapi to start
-        run: sleep 30  # Adjust wait time as needed
-
+      # Step 6: Display Strapi application URL
       - name: Display Strapi application URL
-        run: echo "Strapi application is now running at http://$(hostname -I | cut -d' ' -f1):1337"
+        run: |
+          echo "Strapi application is now running at http://$(hostname -I | cut -d' ' -f1):1337"
 
