@@ -154,7 +154,8 @@
     "npm": "^10.7.0",
     "@strapi/strapi": "*",
     "@strapi/utils": "latest",
-    "yarn": "latest"
+    "yarn": "latest",
+    "@strapi/helper-plugin": "latest"
   },
    "dependencies": {
     "@strapi/utils": "latest",
@@ -172,3 +173,4 @@
   },
   "isStrapiMonorepo": true
 }
+
