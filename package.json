@@ -107,7 +107,6 @@
     "@strapi/plugin-users-permissions": "latest",
     "@strapi/content-releases":"latest",
     "@strapi/plugin-documentation-build":"latest",
-    "@strapi/plugin-color-picker-build":"latest",
     "@strapi/plugin-graphql-build":"latest",
     "@strapi/plugin-sentry-build":"latest",
     "@strapi/plugin-i18n-build":"latest",
