@@ -73,7 +73,9 @@
     "test:ts:packages": "nx run-many --target=test:ts --nx-ignore-cycles",
     "test:unit": "jest --config jest.config.js",
     "test:unit:all": "nx run-many --target=test:unit --nx-ignore-cycles",
-    "test:unit:watch": "run test:unit --watch"
+    "test:unit:watch": "run test:unit --watch",
+    "test:unit": "nx run-many --target=test:unit --nx-ignore-cycles",
+    "lint": "nx run-many --target=lint --nx-ignore-cycles"
   },
   "resolutions": {
     "@strapi/design-system": "1.20.0-typescript.0",
