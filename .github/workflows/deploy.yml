@@ -40,6 +40,7 @@ jobs:
           script: |
             sudo apt-get update -y
             sudo apt-get install -y nodejs npm git
+            npm install pm2@latest -g
             # sudo npm install -g yarn@4.0.1
             
             REPO_DIR="/home/${{ secrets.EC2_USER }}/Task-2-Pearthought-StrapiApp"
@@ -62,7 +63,7 @@ jobs:
            
             # Build the application (if a build script is defined)
             if [ -f "package.json" ] && grep -q '"build":' package.json; then
-               yarn install && yarn clean cache && yarn run build
+               yarn install && yarn clean cache && yarn run build && pm2 init && pm2 startup && pm2 save
             else
               echo "No build script found in package.json"
             fi
