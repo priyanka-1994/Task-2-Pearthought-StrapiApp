@@ -56,7 +56,7 @@ jobs:
 
             # Install dependencies and build (adjust as per your project's setup)
             yarn cache clean
-            yarn install --immutable
+            yarn install --force
             yarn build
 
       # Step 5: Display application URL
