@@ -150,6 +150,9 @@
     "yargs": "17.7.2",
     "npm": "^10.7.0"
   },
+   "dependencies": {
+    "@strapi/utils": "latest"
+  },
   "packageManager": "yarn@4.0.1",
   "engines": {
     "node": ">=18.0.0 <=20.x.x",
