@@ -149,6 +149,7 @@
     "typescript": "5.2.2",
     "yargs": "17.7.2",
     "npm": "^10.7.0"
+    "@strapi/strapi": "*"
   },
    "dependencies": {
     "@strapi/utils": "latest"
