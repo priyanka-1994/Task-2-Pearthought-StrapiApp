@@ -63,10 +63,15 @@ jobs:
            
             # Build the application (if a build script is defined)
             if [ -f "package.json" ] && grep -q '"build":' package.json; then
-               yarn install && yarn clean cache && yarn run build && pm2 init && pm2 startup && pm2 save
+               yarn run build
             else
               echo "No build script found in package.json"
             fi
+
+            # Create and start Strapi app
+            yarn create strapi-app pearlthought-proj --quickstart
+            cd pearlthought-proj
+            yarn develop
           
 
       # Step 5: Display application URL And 
