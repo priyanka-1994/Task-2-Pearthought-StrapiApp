@@ -1,4 +1,4 @@
-name: Deploy Strapi Application
+name: Deploy Code to EC2
 
 on:
   push:
@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Clone the repository
+      # Step 1: Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
@@ -20,7 +20,7 @@ jobs:
       - name: Setup Node.js and npm
         uses: actions/setup-node@v2
         with:
-          node-version: '18'
+          node-version: '14'  # Adjust to your Node.js version
           npm: 'latest'
 
       # Step 3: Install Yarn
@@ -41,18 +41,25 @@ jobs:
             sudo npm install -g yarn
             
             REPO_DIR="/home/${{ secrets.EC2_USER }}/Task-2-Pearthought-StrapiApp"
+            
+            # Clone or pull the repository
             if [ ! -d "$REPO_DIR" ]; then
               git clone https://github.com/priyanka-1994/Task-2-Pearthought-StrapiApp.git $REPO_DIR
             else
-              cd $REPO_DIR && git pull
+              cd $REPO_DIR
+              git fetch --all
+              git reset --hard origin/main  # Reset to main branch
+              git pull origin main
             fi
 
             cd $REPO_DIR
-            npm install
-            npm run build
 
-      # Step 5: Display Strapi application URL
-      - name: Display Strapi application URL
+            # Install dependencies and build (adjust as per your project's setup)
+            yarn install --immutable
+            yarn build
+
+      # Step 5: Display application URL
+      - name: Display application URL
         run: |
-          echo "Strapi application is now running at http://$(hostname -I | cut -d' ' -f1):1337"
+          echo "Application is now running at http://$(hostname -I | cut -d' ' -f1):1337"
 
