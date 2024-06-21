@@ -55,6 +55,7 @@ jobs:
             cd $REPO_DIR
 
             # Install dependencies and build (adjust as per your project's setup)
+            yarn cache clean
             yarn install --immutable
             yarn build
 
