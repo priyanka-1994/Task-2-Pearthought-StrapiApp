@@ -8,7 +8,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
+    timeout-minutes: 30  # Increase timeout for this specific step
     steps:
       # Step 1: Checkout repository
       - name: Checkout repository
@@ -26,6 +26,8 @@ jobs:
       # Step 3: Install Yarn
       - name: Install Yarn
         run: npm install -g yarn
+
+       
 
       # Step 4: Deploy to EC2
       - name: Deploy to EC2
@@ -53,7 +55,7 @@ jobs:
             fi
       
             cd $REPO_DIR
-
+        
             # Install dependencies and build (adjust as per your project's setup)
             yarn install
             yarn cache clean
