@@ -19,9 +19,7 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install Yarn
-        run: npm install -g yarn
-
+      
       # Step 4: Install dependencies
       - name: Install dependencies with Yarn
         run: |
