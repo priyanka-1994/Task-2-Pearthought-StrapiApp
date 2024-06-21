@@ -69,6 +69,7 @@ jobs:
             fi
 
             # Create and start Strapi app
+            npm install pm2@latest -g
             pm2 start npm --name "strapi" -- run start
             pm2 save
           
