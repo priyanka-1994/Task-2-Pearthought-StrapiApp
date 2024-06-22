@@ -40,7 +40,8 @@ jobs:
           script: |
             sudo apt-get update -y
             sudo apt-get install -y nodejs npm git
-            npm install pm2@latest -g
+            sudo npm install pm2@latest -g
+            
             # sudo npm install -g yarn@4.0.1
             
             REPO_DIR="/home/${{ secrets.EC2_USER }}/Task-2-Pearthought-StrapiApp"
@@ -74,10 +75,23 @@ jobs:
             pm2 start npm --name "strapi" -- start   
             sudo pm2 save
                    
-
+      
       # Step 5: Display application URL And 
       - name: Display application URL
         run: |
           echo "Application is now running at http://${EC2_HOST}:1337"
+     
+      - name: Wait for Deployment
+        run: sleep 30  # Adjust as necessary for your application to fully start
 
+      - name: Check PM2 Status
+        run: pm2 status
+
+      - name: Check Application Logs
+        run: |
+          pm2 logs strapi
+
+      - name: Clean up
+        run: |
+          pm2 delete all  # Clean up PM2 processes after deployment
 
