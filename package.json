@@ -76,6 +76,8 @@
     "test:unit:watch": "run test:unit --watch",
     "test:unit": "nx run-many --target=test:unit --nx-ignore-cycles",
     "lint": "nx run-many --target=lint --nx-ignore-cycles",
+    "start": "node ./bin/strapi.js",
+    "build": "webpack --config webpack.config.js",
     "start": "strapi start",
     "develop": "strapi develop",
     "pm2:start": "pm2 start npm --name 'strapi' -- run develop",
