@@ -77,8 +77,10 @@
     "test:unit": "nx run-many --target=test:unit --nx-ignore-cycles",
     "lint": "nx run-many --target=lint --nx-ignore-cycles",
     "start": "strapi start",
-    "pm2-start": "pm2 start npm --name \"strapi\" -- start",
-    "develop": "strapi develop"
+    "develop": "strapi develop",
+    "pm2:start": "pm2 start npm --name 'strapi' -- run develop",
+    "pm2:save": "pm2 save"
+    
   },
   "resolutions": {
     "@strapi/design-system": "1.20.0-typescript.0",
