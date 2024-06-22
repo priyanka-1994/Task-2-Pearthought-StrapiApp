@@ -71,10 +71,9 @@ jobs:
             # Create and start Strapi app
             sudo npm install pm2@latest -g
             sudo npm fund
-            sudo pm2 start npm --name "strapi" -- run develop 
+            pm2 start npm --name "strapi" -- start   
             sudo pm2 save
-            sudo yarn develop
-          
+                   
 
       # Step 5: Display application URL And 
       - name: Display application URL
