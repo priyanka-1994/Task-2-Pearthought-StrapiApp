@@ -72,8 +72,9 @@ jobs:
             # Create and start Strapi app
             sudo npm install pm2@latest -g
             sudo npm fund
-            pm2 start npm --name "strapi" -- start   
+            pm2 start npm --name "strapi" -- run develop
             sudo pm2 save
+            pm2 logs
                    
       
       # Step 5: Display application URL And 
@@ -81,17 +82,4 @@ jobs:
         run: |
           echo "Application is now running at http://${EC2_HOST}:1337"
      
-      - name: Wait for Deployment
-        run: sleep 30  # Adjust as necessary for your application to fully start
-
-      - name: Check PM2 Status
-        run: pm2 status
-
-      - name: Check Application Logs
-        run: |
-          pm2 logs strapi
-
-      - name: Clean up
-        run: |
-          pm2 delete all  # Clean up PM2 processes after deployment
-
+  
