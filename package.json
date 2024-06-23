@@ -28,7 +28,7 @@
     "examples/plugins/*",
     ".github/actions/*",
     "scripts/*",
-    "priya-strapi-proj"
+    "new-project"
   ],
   "scripts": {
     "start": "strapi start",
