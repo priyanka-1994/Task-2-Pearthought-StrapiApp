@@ -21,11 +21,11 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install Yarn 
+      - name: Install Yarn
         run: npm install -g yarn
 
       - name: Install Strapi
-        run: sudo npm install strapi -g    
+        run: sudo npm install strapi -g
 
       - name: Deploy to EC2
         uses: appleboy/ssh-action@master
@@ -40,6 +40,7 @@ jobs:
 
             REPO_DIR="/home/${{ secrets.EC2_USER }}/Task-2-Pearthought-StrapiApp"
 
+            # Clone or update repository
             if [ ! -d "$REPO_DIR" ]; then
               git clone https://github.com/priyanka-1994/Task-2-Pearthought-StrapiApp.git $REPO_DIR
             else
@@ -48,27 +49,22 @@ jobs:
               git reset --hard origin/main
               git pull origin main
             fi
-               
 
-          # Check if the 'new-strapi' directory exists and is not empty, and remove it if necessary
+            # Remove 'new-strapi' directory if exists and not empty
             if [ -d "$REPO_DIR/new-strapi" ]; then
               rm -rf $REPO_DIR/new-strapi
             fi
 
-          
-            # Ensure new-project directory is empty before creating Strapi app
+            # Navigate to 'new-project' directory and perform build
             cd $REPO_DIR/new-project
-          
-            # build process
             pm2 delete all
             yarn install && yarn build
-            
+
             # Create new Strapi app in 'new-project' directory
             cd $REPO_DIR
             strapi new new-project --quickstart
-             
             cd $REPO_DIR/new-project
-          
-        
+
+            # Start Strapi app with PM2
             pm2 start yarn --name "strapi" -- run develop
-          
+
