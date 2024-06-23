@@ -9,6 +9,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     timeout-minutes: 90  # Increase timeout for this specific step
+
     steps:
       # Step 1: Checkout repository
       - name: Checkout repository
@@ -27,8 +28,6 @@ jobs:
       - name: Install Yarn
         run: npm install -g yarn
 
-       
-
       # Step 4: Deploy to EC2
       - name: Deploy to EC2
         uses: appleboy/ssh-action@master
@@ -40,12 +39,9 @@ jobs:
           script: |
             sudo apt-get update -y
             sudo apt-get install -y nodejs npm git
-            sudo npm install pm2@latest -g
-            
-            # sudo npm install -g yarn@4.0.1
-            
+
             REPO_DIR="/home/${{ secrets.EC2_USER }}/Task-2-Pearthought-StrapiApp"
-            
+
             # Clone or pull the repository
             if [ ! -d "$REPO_DIR" ]; then
               git clone https://github.com/priyanka-1994/Task-2-Pearthought-StrapiApp.git $REPO_DIR
@@ -55,31 +51,23 @@ jobs:
               git reset --hard origin/main  # Reset to main branch
               git pull origin main
             fi
-      
+
             cd $REPO_DIR
-        
-            # Install dependencies and build (adjust as per your project's setup)
+
+            # Install dependencies
             yarn install
             yarn cache clean
-           
-            # Build the application (if a build script is defined)
+
+            # Build the application if needed
             if [ -f "package.json" ] && grep -q '"build":' package.json; then
-               yarn run build 
+              yarn run build
             else
               echo "No build script found in package.json"
             fi
 
-            # Create and start Strapi app
-            sudo npm install pm2@latest -g
-            sudo npm fund
+            # Start Strapi app with PM2
             pm2 start npm --name "strapi" -- run develop
-            sudo pm2 save
-            pm2 logs
-                   
-      
-      # Step 5: Display application URL And 
-      #   - name: Display application URL
-      # run: |
-      #   echo "Application is now running at http://${EC2_HOST}:1337"
-     
-  
+            pm2 save
+
+
+
