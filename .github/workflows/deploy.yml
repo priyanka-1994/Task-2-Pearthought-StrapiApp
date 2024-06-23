@@ -54,11 +54,14 @@ jobs:
 
             # Create new Strapi app in 'new-project' directory
             cd $REPO_DIR
-            sudo npm install strapi -g
+            sudo npm install strapi@latest -g
             strapi new new-project --quickstart
+
+            # Install dependencies for Strapi app
             cd $REPO_DIR/new-project && yarn install && npm cache clean --force
-             # adding
-            sudo npm install -g pm2
+             
+            # adding
+            sudo npm install pm2@latest -g
             # Start Strapi app with PM2
             pm2 start yarn --name "strapi" -- run develop
             pm2 delete all
