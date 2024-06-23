@@ -60,13 +60,15 @@ jobs:
 
             # Ensure dependencies are installed
             cd /home/ubuntu/Task-2-Pearthought-StrapiApp/priya-strapi-proj && yarn install
-
+            
             # Build if needed (adjust this based on your project setup)
             yarn build
-
+            rm package.json
+            touch yarn.lock
+            
             # Stop all running instances of Strapi
             #pm2 stop all
-            #pm2 delete all
+            pm2 delete all
 
             # Start Strapi using PM2
             pm2 start yarn --name "strapi" -- develop
