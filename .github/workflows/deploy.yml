@@ -55,16 +55,12 @@ jobs:
               rm -rf $REPO_DIR/new-project
             fi
 
-            # Navigate to 'new-project' directory and perform build
-            cd $REPO_DIR
-            
-            yarn install && yarn build
 
             # Create new Strapi app in 'new-project' directory
             cd $REPO_DIR
             strapi new new-project --quickstart
             cd $REPO_DIR/new-project && yarn install
-
+            npm cache clean --force
             if [ -d "yarn.lock" ]; then
               rm -rf yarn.lock && touch yarn.lock
 
