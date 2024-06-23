@@ -61,14 +61,19 @@ jobs:
 
             # Install dependencies using Yarn
             yarn install
-
+            
+            # Install Strapi globally
+            sudo npm install strapi@beta -g   
+            
             # Build the project (if applicable)
-            yarn workspace priya-strapi-proj build
+            yarn build
 
+            strapi new new-project --quickstart
+            cd new-project
             # Stop all running instances of Strapi
-            pm2 delete all
+          
 
             # Start Strapi using PM2
-            pm2 start yarn --name "strapi" --workspace priya-strapi-proj -- develop
+            pm2 start yarn --name "strapi" -- run develop
             pm2 save
 
