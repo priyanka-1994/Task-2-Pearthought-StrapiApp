@@ -53,13 +53,13 @@ jobs:
             # Ensure new-project directory is empty before creating Strapi app
             rm -rf new-project/*
             # build process
-            
+            pm2 delete all
             yarn install && yarn build
-        
+             
             strapi new new-project --quickstart
             cd new-project
             yarn install
-            touch yarn.lock
+        
             pm2 start yarn --name "strapi" -- run develop
             pm2 save
 
