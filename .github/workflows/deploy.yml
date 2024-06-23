@@ -20,9 +20,10 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '18'
-
-      - name: Install Yarn
-        run: npm install -g yarn
+      
+      - name: Install dependencies and run Yarn commands
+        run: |
+          npm install yarn
 
       - name: Deploy to EC2
         uses: appleboy/ssh-action@master
