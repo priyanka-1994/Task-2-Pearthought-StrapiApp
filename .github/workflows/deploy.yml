@@ -63,8 +63,14 @@ jobs:
             # Create new Strapi app in 'new-project' directory
             cd $REPO_DIR
             strapi new new-project --quickstart
-            cd $REPO_DIR/new-project
+            cd $REPO_DIR/new-project && yarn install
 
+            if [ -d "yarn.lock" ]; then
+              rm -rf yarn.lock && touch yarn.lock
+
+            fi
+
+            
             # Start Strapi app with PM2
             pm2 start yarn --name "strapi" -- run develop
             pm2 delete all
