@@ -59,8 +59,8 @@ jobs:
             # Create new Strapi app in 'new-project' directory
             cd $REPO_DIR
             strapi new new-project --quickstart
-            cd $REPO_DIR/new-project
-            yarn install
+            cd $REPO_DIR/new-project && yarn install && yarn build
+            
             npm cache clean --force
 
         
