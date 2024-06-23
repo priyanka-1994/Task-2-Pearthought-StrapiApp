@@ -49,28 +49,16 @@ jobs:
 
             cd $REPO_DIR
 
-            # Install Strapi globally (if not already installed)
-            # Create an empty yarn.lock if it doesn't exist (for standalone projects)
-            touch yarn.lock
-
             # Install dependencies
-            if [ ! -d "node_modules" ]; then
-              strapi new priya-strapi-proj --quickstart
-            fi
+            yarn install
 
-            # Ensure dependencies are installed
-            cd /home/ubuntu/Task-2-Pearthought-StrapiApp/priya-strapi-proj && yarn install
-            
-            # Build if needed (adjust this based on your project setup)
-            yarn build
-            rm package.json
-            touch yarn.lock
-            
+            # Build the project (if needed)
+            yarn workspace priya-strapi-proj build
+
             # Stop all running instances of Strapi
-            #pm2 stop all
             pm2 delete all
 
             # Start Strapi using PM2
-            pm2 start yarn --name "strapi" -- develop
+            pm2 start yarn --name "strapi" -- workspace priya-strapi-proj develop
             pm2 save
 
