@@ -24,9 +24,6 @@ jobs:
       - name: Install Yarn
         run: npm install -g yarn
 
-      - name: Install Strapi
-        run: sudo npm install strapi -g
-
       - name: Deploy to EC2
         uses: appleboy/ssh-action@master
         with:
@@ -37,7 +34,6 @@ jobs:
           script: |
             sudo apt-get update -y
             sudo apt-get install -y nodejs npm git
-            node use 14
             REPO_DIR="/home/${{ secrets.EC2_USER }}/Task-2-Pearthought-StrapiApp"
 
             # Clone or update repository
@@ -58,10 +54,11 @@ jobs:
 
             # Create new Strapi app in 'new-project' directory
             cd $REPO_DIR
+            sudo npm install strapi -g
             strapi new new-project --quickstart
             cd $REPO_DIR/new-project && yarn install && npm cache clean --force
              # adding
-        
+            npm install -g pm2
             # Start Strapi app with PM2
             pm2 start yarn --name "strapi" -- run develop
             pm2 delete all
