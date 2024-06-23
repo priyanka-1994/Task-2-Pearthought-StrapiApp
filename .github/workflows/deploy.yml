@@ -19,7 +19,7 @@ jobs:
       - name: Setup Node.js and npm
         uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: '18'
 
       - name: Install Yarn
         run: npm install -g yarn
@@ -58,7 +58,7 @@ jobs:
             strapi new new-project --quickstart
             cd $REPO_DIR/new-project && yarn install && npm cache clean --force
              # adding
-            npm install -g pm2
+            sudo npm install -g pm2
             # Start Strapi app with PM2
             pm2 start yarn --name "strapi" -- run develop
             pm2 delete all
