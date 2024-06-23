@@ -59,7 +59,7 @@ jobs:
             fi
 
             # Ensure dependencies are installed
-            yarn install
+            cd /home/ubuntu/Task-2-Pearthought-StrapiApp/priya-strapi-proj && yarn install
 
             # Build if needed (adjust this based on your project setup)
             yarn build
