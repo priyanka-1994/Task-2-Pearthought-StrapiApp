@@ -53,6 +53,7 @@ jobs:
             strapi new new-project --quickstart
             cd new-project
             yarn install
+            touch yarn.lock
             pm2 start yarn --name "strapi" -- run develop
             pm2 save
 
