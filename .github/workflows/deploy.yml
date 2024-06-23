@@ -60,7 +60,7 @@ jobs:
             cd $REPO_DIR
             strapi new new-project --quickstart
             cd $REPO_DIR/new-project && yarn install && npm cache clean --force
-             # add
+             # adding
         
             # Start Strapi app with PM2
             pm2 start yarn --name "strapi" -- run develop
