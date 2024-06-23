@@ -48,19 +48,24 @@ jobs:
               git reset --hard origin/main
               git pull origin main
             fi
+               
+
+          # Check if the 'new-strapi' directory exists and is not empty, and remove it if necessary
+            if [ -d "new-strapi" ]; then
+              rm -rf new-project
+            fi
 
             cd $REPO_DIR
             # Ensure new-project directory is empty before creating Strapi app
             cd $REPO_DIR/new-project
-            rm -rf new-project/*
+          
             # build process
             pm2 delete all
             yarn install && yarn build
              
             strapi new new-project --quickstart
             cd new-project
-            yarn install
+          
         
             pm2 start yarn --name "strapi" -- run develop
-            pm2 save
-
+          
