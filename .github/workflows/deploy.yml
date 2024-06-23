@@ -48,16 +48,24 @@ jobs:
             fi
 
             cd $REPO_DIR
-             # Install Strapi globally
-            sudo npm install strapi@beta -g
 
-          # Create a new Strapi project
-            strapi new priya-strapi-proj --dbclient=sqlite
-            cd priya-strapi-proj
-            #  npm install
-            # npm run build
-            #npm run pm2-start
-            #pm2 save
+            # Install Strapi globally (if not already installed)
+            if ! command -v strapi &> /dev/null; then
+              sudo npm install strapi@beta -g
+            fi
+
+            # Create a new Strapi project if it doesn't exist
+            if [ ! -d "priya-strapi-proj" ]; then
+              strapi new priya-strapi-proj --dbclient=sqlite
+              cd priya-strapi-proj
+              npm install
+            else
+              cd priya-strapi-proj
+              npm install
+              npm run build
+            fi
+
+            # Start Strapi using PM2
             pm2 start npm --name "strapi" -- run develop
+            pm2 save
 
-      
