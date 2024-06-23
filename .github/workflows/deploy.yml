@@ -8,27 +8,23 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 90  # Increase timeout for this specific step
+    timeout-minutes: 90
 
     steps:
-      # Step 1: Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
-          fetch-depth: 0  # Fetch all history
+          fetch-depth: 0
 
-      # Step 2: Set up Node.js and npm
       - name: Setup Node.js and npm
         uses: actions/setup-node@v2
         with:
-          node-version: '18'  # Adjust to your Node.js version
+          node-version: '18'
           npm: 'latest'
 
-      # Step 3: Install Yarn
       - name: Install Yarn
         run: npm install -g yarn
 
-      # Step 4: Deploy to EC2
       - name: Deploy to EC2
         uses: appleboy/ssh-action@master
         with:
@@ -42,35 +38,23 @@ jobs:
 
             REPO_DIR="/home/${{ secrets.EC2_USER }}/Task-2-Pearthought-StrapiApp"
 
-            # Clone or pull the repository
             if [ ! -d "$REPO_DIR" ]; then
               git clone https://github.com/priyanka-1994/Task-2-Pearthought-StrapiApp.git $REPO_DIR
             else
               cd $REPO_DIR
               git fetch --all
-              git reset --hard origin/main  # Reset to main branch
+              git reset --hard origin/main
               git pull origin main
             fi
 
             cd $REPO_DIR
 
-            # Install dependencies
-            yarn install
-            yarn cache clean
-
-            # Build the application if needed
-            if [ -f "package.json" ] && grep -q '"build":' package.json; then
-              yarn run build
-            else
-              echo "No build script found in package.json"
-            fi
-
-            # Start Strapi app with PM2
-            pm2 start npm --name "strapi" -- run develop
+            npm install
+            npm run build
+            npm run pm2-start
             pm2 save
-      - name: Check Build Logs
-        run: |
-          cd /home/${{ secrets.EC2_USER }}/Task-2-Pearthought-StrapiApp
-          nx affected --target=build --all --verbose
 
+      - name: Display application URL
+        run: |
+          echo "Application is now running at http://${EC2_HOST}:1337"
 
