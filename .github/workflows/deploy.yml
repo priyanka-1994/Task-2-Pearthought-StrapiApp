@@ -52,6 +52,7 @@ jobs:
             sudo npm install strapi -g
             strapi new new-project --quickstart
             cd new-project
+            yarn install
             pm2 start yarn --name "strapi" -- run develop
             pm2 save
 
