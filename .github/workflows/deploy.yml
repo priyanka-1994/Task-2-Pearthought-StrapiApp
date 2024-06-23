@@ -78,8 +78,8 @@ jobs:
                    
       
       # Step 5: Display application URL And 
-      - name: Display application URL
-        run: |
-          echo "Application is now running at http://${EC2_HOST}:1337"
+      #   - name: Display application URL
+      # run: |
+      #   echo "Application is now running at http://${EC2_HOST}:1337"
      
   
