@@ -48,13 +48,16 @@ jobs:
             fi
 
             cd $REPO_DIR
+             # Install Strapi globally
+            sudo npm install strapi@beta -g
 
-            npm install
-            npm run build
-            npm run pm2-start
-            pm2 save
+          # Create a new Strapi project
+            strapi new priya-strapi-proj --dbclient=sqlite
+            cd priya-strapi-proj
+            #  npm install
+            # npm run build
+            #npm run pm2-start
+            #pm2 save
+            pm2 start npm --name "strapi" -- run develop
 
-      - name: Display application URL
-        run: |
-          echo "Application is now running at http://${EC2_HOST}:1337"
-
+      
