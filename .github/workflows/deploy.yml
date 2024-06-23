@@ -51,13 +51,13 @@ jobs:
             fi
 
             # Remove 'new-strapi' directory if exists and not empty
-            if [ -d "$REPO_DIR/new-strapi" ]; then
-              rm -rf $REPO_DIR/new-strapi
+            if [ -d "$REPO_DIR/new-project" ]; then
+              rm -rf $REPO_DIR/new-project
             fi
 
             # Navigate to 'new-project' directory and perform build
-            cd $REPO_DIR/new-project
-            pm2 delete all
+            cd $REPO_DIR
+            
             yarn install && yarn build
 
             # Create new Strapi app in 'new-project' directory
@@ -67,4 +67,5 @@ jobs:
 
             # Start Strapi app with PM2
             pm2 start yarn --name "strapi" -- run develop
+            pm2 delete all
 
