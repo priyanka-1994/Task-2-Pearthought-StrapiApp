@@ -68,6 +68,9 @@ jobs:
             # Start Strapi app with PM2
             pm2 start npm --name "strapi" -- run develop
             pm2 save
-
+      - name: Check Build Logs
+        run: |
+          cd /home/${{ secrets.EC2_USER }}/Task-2-Pearthought-StrapiApp
+          nx affected --target=build --all --verbose
 
 
