@@ -51,6 +51,7 @@ jobs:
 
             cd $REPO_DIR
             # Ensure new-project directory is empty before creating Strapi app
+            cd $REPO_DIR/new-project
             rm -rf new-project/*
             # build process
             pm2 delete all

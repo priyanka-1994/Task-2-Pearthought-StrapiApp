@@ -32,7 +32,6 @@
   ],
   "scripts": {
     "start": "strapi start",
-    "start": "pm2 start yarn --name 'strapi' -- develop",
     "build": "strapi build",
     "develop": "strapi develop",
     "deploy": "npm install && npm run build && npm run pm2-start",
