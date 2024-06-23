@@ -48,7 +48,7 @@ jobs:
             fi
 
             cd $REPO_DIR
-
+            # build process
             yarn install && yarn build
             sudo npm install strapi -g
             strapi new new-project --quickstart
