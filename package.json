@@ -155,8 +155,7 @@
     "typescript": "latest",
     "yargs": "17.7.2",
     "yarn": "yarn install",
-    "yarn": "yarn build",
-    "yarn": "yarn develop"
+    "yarn": "yarn build"  
   },
   "dependencies": {
     "@strapi/helper-plugin": "latest",
