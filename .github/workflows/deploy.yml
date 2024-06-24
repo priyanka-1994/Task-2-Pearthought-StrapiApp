@@ -71,6 +71,12 @@ jobs:
             yarn install && yarn build
             yarn cache clean
 
+      - name: Ensure the directory is empty
+        run: |
+           if [ -d "new-project" ]; then
+             rm -rf new-project
+           fi
+
             strapi new new-project --dbclient=sqlite
             cd $REPO_DIR/new-project && yarn install
             yarn develop
