@@ -22,7 +22,7 @@ jobs:
           node-version: '18'
 
       - name: Install yarn
-        run: npm install yarn
+        run: sudo npm install -g yarn
 
 
       - name: Deploy to EC2
@@ -55,11 +55,9 @@ jobs:
 
             # Create new Strapi app in 'new-project' directory
             cd $REPO_DIR
-            usr/local/bin/yarn install
-            sudo /usr/local/bin/yarn global add strapi@latest  # Install Strapi globally
+            yarn install
+            yarn global add strapi@latest  # Install Strapi globally
             strapi new new-project --quickstart
 
             # Install dependencies for Strapi app
-            cd $REPO_DIR/new-project && /usr/local/bin/yarn install
-
-            /usr/local/bin/yarn develop
+            cd $REPO_DIR/new-project && yarn install && yarn develop
