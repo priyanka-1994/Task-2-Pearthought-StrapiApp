@@ -63,7 +63,7 @@ jobs:
         
             cd $REPO_DIR
             yarn install
-            sudo npm install -g strapi@beta
+            
             sudo npm install -g yarn
             
             # Install dependencies and build (adjust as per your project's setup)
@@ -78,6 +78,7 @@ jobs:
            fi
 
             strapi new new-project --quickstart
+            sudo npm install -g strapi@beta
             cd $REPO_DIR/new-project && yarn install
             yarn develop
             # Create and start Strapi app
