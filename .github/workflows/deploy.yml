@@ -28,11 +28,8 @@ jobs:
       - name: Clear npm cache
         run: npm cache clean --force
 
-      # Step 3: Install Yarn
-      - name: Install Yarn
-        run: yarn install 
-
       
+    
 
       # Step 4: Deploy to EC2
       - name: Deploy to EC2
@@ -65,8 +62,9 @@ jobs:
             
         
             cd $REPO_DIR
-            sudo npm install strapi@beta -g
-
+            sudo npm install -g strapi@beta
+            sudo npm install -g yarn@4.0.1
+  
             # Install dependencies and build (adjust as per your project's setup)
            
             yarn build
@@ -78,7 +76,7 @@ jobs:
              rm -rf new-project
            fi
 
-            strapi new new-project --dbclient=sqlite
+            strapi new new-project --quickstart
             cd $REPO_DIR/new-project && yarn install
             yarn develop
             # Create and start Strapi app
