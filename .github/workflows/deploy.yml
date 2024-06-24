@@ -1,4 +1,4 @@
-name: Deploy Strapi to EC2
+name: Deploy Code to EC2
 
 on:
   push:
@@ -8,28 +8,28 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 90
-
+    timeout-minutes: 90  # Increase timeout for this specific step
     steps:
+      # Step 1: Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
-          fetch-depth: 0
+          fetch-depth: 0  # Fetch all history
 
+      # Step 2: Set up Node.js and npm
       - name: Setup Node.js and npm
         uses: actions/setup-node@v2
         with:
-          node-version: '18'
+          node-version: '18'  # Adjust to your Node.js version
+          npm: 'latest'
 
+      # Step 3: Install Yarn
       - name: Install Yarn
         run: npm install -g yarn
-       
-      - name: Install nx
-        run: npm install -g nx
-          #- name: Install Strapi
-          #run: sudo npm install strapi -g
-         
 
+
+
+      # Step 4: Deploy to EC2
       - name: Deploy to EC2
         uses: appleboy/ssh-action@master
         with:
@@ -37,59 +37,41 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           port: 22
-        
           script: |
             sudo apt-get update -y
             sudo apt-get install -y nodejs npm git
-           
+            sudo npm install pm2@latest -g
+
+            # sudo npm install -g yarn@4.0.1
+
             REPO_DIR="/home/${{ secrets.EC2_USER }}/Task-2-Pearthought-StrapiApp"
-            # Clone or update repository
+
+            # Clone or pull the repository
             if [ ! -d "$REPO_DIR" ]; then
               git clone https://github.com/priyanka-1994/Task-2-Pearthought-StrapiApp.git $REPO_DIR
             else
               cd $REPO_DIR
               git fetch --all
-              git reset --hard origin/main
+              git reset --hard origin/main  # Reset to main branch
               git pull origin main
             fi
-            # Remove 'new-strapi' directory if exists and not empty
-             if [ -d "$REPO_DIR/new-project" ]; then
-               rm -rf $REPO_DIR/new-project
-             fi
-            # Create new Strapi app in 'new-project' directory
-            
-            # Handle new-project directory and Strapi setup
-            #if [ ! -d "$REPO_DIR/new-project" ]; then
-               cd $REPO_DIR
-               npm install
-               yarn create strapi-app new-project --quickstart
-               cd new-project
-               yarn install
-               yarn build
-               yarn develop
-               #fi
-            
-            # cd $REPO_DIR 
-            # yarn install
-            #  npm run build
-            
-            # yarn create strapi-app new-project--quickstart
-            #rm -rf /home/ubuntu/Task-2-Pearthought-StrapiApp/yarn.lock
-            #rm -rf /home/ubuntu/Task-2-Pearthought-StrapiApp/package.json
-            # cd new-project
-            # touch /home/ubuntu/Task-2-Pearthought-StrapiApp/new-project/yarn.lock
-            
-            #yarn install
-            #touch /home/ubuntu/Task-2-Pearthought-StrapiApp/new-project/yarn.lock
-            #yarn build
-            # yarn develop
-            #strapi new new-project --quickstart
-            #cd $REPO_DIR/new-project && npm install 
-            
-            
-            npm cache clean --force
-        
-            # Start Strapi app with PM2
-            #pm2 start yarn --name "strapi" -- run develop
-            #pm2 delete all
 
+            cd $REPO_DIR
+
+            # Install dependencies and build (adjust as per your project's setup)
+            yarn install && npm run build
+            yarn cache clean
+
+            # Build the application (if a build script is defined)
+            if [ -f "package.json" ] && grep -q '"build":' package.json; then
+               yarn run build
+            else
+              echo "No build script found in package.json"
+            fi
+
+            # Create and start Strapi app
+            sudo npm install pm2@latest -g
+            sudo npm fund
+            pm2 start npm --name "strapi" -- run develop
+            sudo pm2 save
+            pm2 logs
