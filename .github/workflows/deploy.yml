@@ -64,7 +64,7 @@ jobs:
             cd $REPO_DIR
             sudo npm install -g strapi@beta
             sudo npm install -g yarn
-  
+            yarn install
             # Install dependencies and build (adjust as per your project's setup)
            
             yarn build
