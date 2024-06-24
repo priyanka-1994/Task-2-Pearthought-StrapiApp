@@ -61,7 +61,7 @@ jobs:
             # Handle new-project directory and Strapi setup
             #if [ ! -d "$REPO_DIR/new-project" ]; then
                cd $REPO_DIR
-               yarn install
+               npm install
                yarn create strapi-app new-project --quickstart
                cd new-project
                yarn install
