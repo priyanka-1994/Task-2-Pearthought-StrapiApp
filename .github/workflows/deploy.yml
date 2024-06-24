@@ -34,9 +34,7 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           port: 22
-          env:
-            npm_config_production: false
-            npm_config_optional: true
+        
           script: |
             sudo apt-get update -y
             sudo apt-get install -y nodejs npm git yarn
