@@ -154,7 +154,7 @@
     "ts-jest": "29.1.0",
     "typescript": "latest",
     "yargs": "17.7.2",
-    "yarn": "yarn install"
+    "yarn": "yarn install",
     "yarn": "yarn build",
     "yarn": "yarn develop"
   },
