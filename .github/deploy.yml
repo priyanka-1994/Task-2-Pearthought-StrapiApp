@@ -21,7 +21,9 @@ jobs:
         with:
           node-version: '18'
       
-      
+      - name: Install dependencies
+        run: npm install -g yarn
+
 
       - name: Deploy to EC2
         uses: appleboy/ssh-action@master
@@ -58,6 +60,7 @@ jobs:
 
             # Install dependencies for Strapi app
             cd $REPO_DIR/new-project && yarn install
+            yarn build
             yarn develop
             # adding
             #     sudo npm install pm2@latest -g
