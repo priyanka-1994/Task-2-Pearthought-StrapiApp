@@ -33,7 +33,6 @@
   "scripts": {
     "start": "strapi start",
     "build": "strapi build",
-    "develop": "strapi develop",
     "deploy": "npm install && npm run build && npm run pm2-start",
     "pm2-start": "pm2 start npm --name 'strapi' -- run develop",
     "pm2-save": "pm2 save",
@@ -162,8 +161,7 @@
     "typescript": "latest",
     "yargs": "17.7.2",
     "npm": "^10.7.0",
-    "@strapi/utils": "latest",
-    "yarn": "latest"
+    "@strapi/utils": "latest"
    },
    "dependencies": {
      "typescript": "^4.5.6",
