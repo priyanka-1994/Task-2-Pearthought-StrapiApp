@@ -28,7 +28,8 @@ jobs:
       - name: Clear npm cache
         run: npm cache clean --force
 
-      
+      - name: Install Strapi CLI
+        run: npm install -g strapi@latest
     
 
       # Step 4: Deploy to EC2
@@ -43,7 +44,7 @@ jobs:
             sudo apt-get update -y
             sudo apt upgrade -y
             sudo apt-get install -y nodejs npm
-            # sudo npm install pm2@latest -g
+            sudo npm install pm2@latest -g
 
             # sudo npm install -g yarn@4.0.1
 
