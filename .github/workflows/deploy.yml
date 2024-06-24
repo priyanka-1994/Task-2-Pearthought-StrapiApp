@@ -23,6 +23,9 @@ jobs:
 
       - name: Install yarn
         run:  npm install -g yarn
+   
+      - name: Verify Yarn version
+        run: yarn --version
 
 
       - name: Deploy to EC2
