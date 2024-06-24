@@ -155,6 +155,7 @@
     "typescript": "latest",
     "yargs": "17.7.2",
     "npm": "^10.7.0",
+    "@strapi/admin-test-utils": "workspace:*",
     "@strapi/utils": "latest"
    },
    "dependencies": {

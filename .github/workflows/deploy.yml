@@ -18,10 +18,15 @@ jobs:
 
       # Step 2: Set up Node.js and npm
       - name: Setup Node.js and npm
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: '18'  # Adjust to your Node.js version
-          npm: 'latest'
+          node-version: '18'  
+      
+      - name: Upgrade npm
+        run: npm install -g npm@latest
+ 
+      - name: Clear npm cache
+        run: npm cache clean --force
 
       # Step 3: Install Yarn
       - name: Install Yarn
@@ -39,7 +44,8 @@ jobs:
           port: 22
           script: |
             sudo apt-get update -y
-            sudo apt-get install -y nodejs npm git
+            sudo apt upgrade -y
+            sudo apt-get install -y nodejs npm
             sudo npm install pm2@latest -g
 
             # sudo npm install -g yarn@4.0.1
@@ -56,18 +62,14 @@ jobs:
               git pull origin main
             fi
 
-            cd $REPO_DIR
+            cd $REPO_DIR 
+            sudo npm install strapi@beta -g
 
             # Install dependencies and build (adjust as per your project's setup)
             yarn install && npm run build
             yarn cache clean
 
-            # Build the application (if a build script is defined)
-            if [ -f "package.json" ] && grep -q '"build":' package.json; then
-               yarn run build
-            else
-              echo "No build script found in package.json"
-            fi
+            strapi new new-project --dbclient=sqlite
 
             # Create and start Strapi app
             sudo npm install pm2@latest -g
