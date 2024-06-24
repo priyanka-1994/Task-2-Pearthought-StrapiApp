@@ -37,7 +37,7 @@ jobs:
         
           script: |
             sudo apt-get update -y
-            sudo apt-get install -y nodejs npm git yarn
+            sudo apt-get install -y nodejs npm git
            
             REPO_DIR="/home/${{ secrets.EC2_USER }}/Task-2-Pearthought-StrapiApp"
             # Clone or update repository
@@ -57,8 +57,8 @@ jobs:
             cd $REPO_DIR
             yarn install && yarn build
             strapi new new-project --quickstart
-            cd $REPO_DIR/new-project && yarn install 
-            yarn build
+            cd $REPO_DIR/new-project && npm install 
+            
             
             npm cache clean --force
         
