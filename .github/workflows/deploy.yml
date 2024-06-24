@@ -65,6 +65,10 @@ jobs:
             yarn cache clean
             
             # Start the Strapi application with pm2
+            cd .
+            yarn install
+            yarn build
+            yarn cache clean
             sudo npm install -g pm2@latest
             pm2 start npm --name "strapi" -- run start
             pm2 save  # Save current processes to be restored on server restart
