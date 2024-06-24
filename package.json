@@ -31,12 +31,6 @@
     "new-project"
   ],
   "scripts": {
-    "start": "strapi start",
-    "build": "strapi build",
-    "deploy": "npm install && npm run build && npm run pm2-start",
-    "pm2-start": "pm2 start npm --name 'strapi' -- run develop",
-    "pm2-save": "pm2 save",
-    "postinstall": "npm run deploy",
     "build": "nx run-many --target=build --nx-ignore-cycles",
     "build:size": "cd examples/getstarted && yarn build",
     "build:ts": "nx run-many --target=build:ts --nx-ignore-cycles",
