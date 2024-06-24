@@ -46,7 +46,7 @@ jobs:
             sudo apt-get update -y
             sudo apt upgrade -y
             sudo apt-get install -y nodejs npm
-            sudo npm install pm2@latest -g
+            # sudo npm install pm2@latest -g
 
             # sudo npm install -g yarn@4.0.1
 
@@ -62,12 +62,13 @@ jobs:
               git pull origin main
             fi
 
-            cd $REPO_DIR 
+            
             sudo npm install strapi@beta -g
+            cd $REPO_DIR
 
             # Install dependencies and build (adjust as per your project's setup)
            
-            yarn install && npm run build
+            yarn install && yarn build
             yarn cache clean
 
             strapi new new-project --dbclient=sqlite
