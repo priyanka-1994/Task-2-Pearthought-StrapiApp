@@ -159,8 +159,7 @@
   },
   "dependencies": {
     "@strapi/design-system": "1.20.0-typescript.0",
-    "@types/koa": "2.13.4",
-    "strapi-admin": "^0.0.0-next.2a816cdadd2ece37767550b2a249c03ef2b53aeb"
+    "@types/koa": "2.13.4"
   },
   "packageManager": "yarn@4.0.1",
   "engines": {
