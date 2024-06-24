@@ -53,9 +53,9 @@ jobs:
               git pull origin main
             fi
             # Remove 'new-strapi' directory if exists and not empty
-            if [ -d "$REPO_DIR/new-project" ]; then
-              rm -rf $REPO_DIR/new-project
-            fi
+            # if [ -d "$REPO_DIR/new-project" ]; then
+            # rm -rf $REPO_DIR/new-project
+            #fi
             # Create new Strapi app in 'new-project' directory
             
             # Handle new-project directory and Strapi setup
@@ -69,11 +69,11 @@ jobs:
                yarn develop
             fi
             
-            cd $REPO_DIR 
-            yarn install
-            npm run build
+            # cd $REPO_DIR 
+            # yarn install
+            #  npm run build
             
-            yarn create strapi-app new-project--quickstart
+            # yarn create strapi-app new-project--quickstart
             #rm -rf /home/ubuntu/Task-2-Pearthought-StrapiApp/yarn.lock
             #rm -rf /home/ubuntu/Task-2-Pearthought-StrapiApp/package.json
             # cd new-project
