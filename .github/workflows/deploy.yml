@@ -19,7 +19,7 @@ jobs:
           node-version: '18'
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install
         # Or use npm:
         # run: npm install
 
@@ -46,7 +46,7 @@ jobs:
           script: |
             cd Task-2-Pearthought-StrapiApp
             git pull origin main
-            yarn install --frozen-lockfile --production
+            yarn install --production
             yarn start
             # Or use npm:
             # npm install --production
