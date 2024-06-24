@@ -3,34 +3,52 @@ name: Deploy to EC2
 on:
   push:
     branches:
-      - main  # adjust to your main branch name
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Install dependencies
-      run: npm install  # or yarn install
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
 
-    - name: Build Strapi app
-      run: npm run build  # or yarn build
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+        # Or use npm:
+        # run: npm install
 
-    - name: Deploy to EC2
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.EC2_HOST }}
-        username: ${{ secrets.EC2_USERNAME }}
-        key: ${{ secrets.EC2_PRIVATE_KEY }}
-        port: ${{ secrets.EC2_PORT }}  # default SSH port is 22
-        script: |
-          cd /path/to/strapi/app
-          git pull origin main  # ensure latest code
-          npm install --production
-          npm run build
-          pm2 restart ecosystem.config.js  # or your process manager command
+      - name: Build Strapi app
+        run: yarn build
+        # Or use npm:
+        # run: npm run build
 
+      - name: Clone repository on EC2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            git clone https://github.com/priyanka-1994/Task-2-Pearthought-StrapiApp.git
+
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd Task-2-Pearthought-StrapiApp
+            git pull origin main
+            yarn install --frozen-lockfile --production
+            yarn start
+            # Or use npm:
+            # npm install --production
+            # npm start
 
