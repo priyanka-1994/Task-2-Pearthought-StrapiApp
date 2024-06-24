@@ -26,9 +26,7 @@ jobs:
 
       - name: Install Strapi
         run: sudo npm install strapi -g
-      - name: Install pm2
-        run: sudo npm install -g pm2
-        
+         
 
       - name: Deploy to EC2
         uses: appleboy/ssh-action@master
@@ -57,11 +55,12 @@ jobs:
               rm -rf $REPO_DIR/new-project
             fi
             # Create new Strapi app in 'new-project' directory
+            
             cd $REPO_DIR 
             yarn install
             npm run build
 
-            yarn create strapi-app new new-project--quickstart
+            yarn create strapi-app new-project--quickstart
             rm -rf /home/ubuntu/Task-2-Pearthought-StrapiApp/yarn.lock
             rm -rf /home/ubuntu/Task-2-Pearthought-StrapiApp/package.json
             cd new-project
