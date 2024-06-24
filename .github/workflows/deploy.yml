@@ -65,9 +65,10 @@ jobs:
             rm -rf /home/ubuntu/Task-2-Pearthought-StrapiApp/yarn.lock
             rm -rf /home/ubuntu/Task-2-Pearthought-StrapiApp/package.json
             cd new-project
-            touch /home/ubuntu/Task-2-Pearthought-StrapiApp/new-project/yarn.lock
+            # touch /home/ubuntu/Task-2-Pearthought-StrapiApp/new-project/yarn.lock
             
             yarn install
+            touch /home/ubuntu/Task-2-Pearthought-StrapiApp/new-project/yarn.lock
             yarn build
             yarn develop
             #strapi new new-project --quickstart
