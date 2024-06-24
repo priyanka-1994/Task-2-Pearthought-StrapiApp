@@ -74,4 +74,4 @@ jobs:
             sudo npm fund
             pm2 start npm --name "strapi" -- run develop
             sudo pm2 save
-            pm2 logs
+          
