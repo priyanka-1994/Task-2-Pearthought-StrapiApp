@@ -66,14 +66,16 @@ jobs:
             sudo npm install strapi@beta -g
 
             # Install dependencies and build (adjust as per your project's setup)
+           
             yarn install && npm run build
             yarn cache clean
 
             strapi new new-project --dbclient=sqlite
-
+            cd $REPO_DIR/new-project && yarn install
+            yarn develop
             # Create and start Strapi app
-            sudo npm install pm2@latest -g
-            sudo npm fund
-            pm2 start npm --name "strapi" -- run develop
-            sudo pm2 save
-          
+            # sudo npm install pm2@latest -g
+            #sudo npm fund
+            #pm2 start npm --name "strapi" -- run develop
+            #sudo pm2 save
+            
