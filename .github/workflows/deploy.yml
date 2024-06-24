@@ -62,7 +62,7 @@ jobs:
             
         
             cd $REPO_DIR
-            npm install
+            yarn install
             sudo npm install -g strapi@beta
             sudo npm install -g yarn
             
