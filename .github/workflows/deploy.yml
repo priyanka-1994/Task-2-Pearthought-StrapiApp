@@ -71,17 +71,17 @@ jobs:
             yarn build
             yarn cache clean
 
-      - name: Ensure the directory is empty
-        run: |
-           if [ -d "new-project" ]; then
-             rm -rf new-project
-           fi
+            #- name: Ensure the directory is empty
+            #run: |
+            #if [ -d "new-project" ]; then
+            #rm -rf new-project
+            #fi
            
            #pm2 start npm --name strapi -- run develop
-            npx create-strapi-app@latest new-project --quickstart
+            pm2 start npm --name "strapi" -- run start
             sudo npm install -g strapi@latest
-            cd $REPO_DIR/new-project && yarn install
-            yarn develop
+            #cd $REPO_DIR/new-project && yarn install
+            #yarn develop
             # Create and start Strapi app
             # sudo npm install pm2@latest -g
             #sudo npm fund
