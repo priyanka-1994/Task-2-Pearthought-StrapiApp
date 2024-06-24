@@ -20,7 +20,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '18'
-      
+
       - name: Install dependencies
         run: npm install -g yarn
 
@@ -67,4 +67,3 @@ jobs:
             # Start Strapi app with PM2
             #pm2 start npm --name "strapi" -- run develop
             # pm2 delete all
-
