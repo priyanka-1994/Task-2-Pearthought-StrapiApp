@@ -63,8 +63,9 @@ jobs:
             fi
 
             
-            sudo npm install strapi@beta -g
+        
             cd $REPO_DIR
+            sudo npm install strapi@beta -g
 
             # Install dependencies and build (adjust as per your project's setup)
            
