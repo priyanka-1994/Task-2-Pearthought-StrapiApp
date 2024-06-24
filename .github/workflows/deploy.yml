@@ -21,6 +21,9 @@ jobs:
         with:
           node-version: '18'
 
+      - name: Install yarn
+        run: npm install yarn
+
 
       - name: Deploy to EC2
         uses: appleboy/ssh-action@master
