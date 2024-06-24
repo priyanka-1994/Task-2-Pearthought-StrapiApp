@@ -30,9 +30,9 @@ jobs:
 
       # Step 3: Install Yarn
       - name: Install Yarn
-        run: npm install -g yarn
+        run: yarn install 
 
-
+      
 
       # Step 4: Deploy to EC2
       - name: Deploy to EC2
@@ -69,7 +69,7 @@ jobs:
 
             # Install dependencies and build (adjust as per your project's setup)
            
-            yarn install && yarn build
+            yarn build
             yarn cache clean
 
       - name: Ensure the directory is empty
