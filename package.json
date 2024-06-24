@@ -28,10 +28,10 @@
     "examples/plugins/*",
     ".github/actions/*",
     "scripts/*",
-    "strapi-pearthought-task-2/*",
     "new-project"
   ],
   "scripts": {
+    "install": "strapi start",
     "develop": "strapi develop",
     "start": "strapi start",
     "build": "nx run-many --target=build --nx-ignore-cycles",
