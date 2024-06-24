@@ -53,13 +53,13 @@ jobs:
               git pull origin main
             fi
             # Remove 'new-strapi' directory if exists and not empty
-            # if [ -d "$REPO_DIR/new-project" ]; then
-            # rm -rf $REPO_DIR/new-project
-            #fi
+             if [ -d "$REPO_DIR/new-project" ]; then
+               rm -rf $REPO_DIR/new-project
+             fi
             # Create new Strapi app in 'new-project' directory
             
             # Handle new-project directory and Strapi setup
-            if [ ! -d "$REPO_DIR/new-project" ]; then
+            #if [ ! -d "$REPO_DIR/new-project" ]; then
                cd $REPO_DIR
                yarn install
                yarn create strapi-app new-project --quickstart
@@ -67,7 +67,7 @@ jobs:
                yarn install
                yarn build
                yarn develop
-            fi
+               #fi
             
             # cd $REPO_DIR 
             # yarn install
