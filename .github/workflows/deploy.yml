@@ -58,9 +58,18 @@ jobs:
             fi
             # Create new Strapi app in 'new-project' directory
             cd $REPO_DIR 
-            strapi new new-project --quickstart
+            yarn install
+            npm run build
+
+            yarn create strapi-app new new-project--quickstart
+            rm -rf /home/ubuntu/Task-2-Pearthought-StrapiApp/yarn.lock
+            rm -rf /home/ubuntu/Task-2-Pearthought-StrapiApp/package.json
             cd new-project
-            yarn install && yarn develop
+            touch /home/ubuntu/Task-2-Pearthought-StrapiApp/new-project/yarn.lock
+            
+            yarn install
+            yarn build
+            yarn develop
             #strapi new new-project --quickstart
             #cd $REPO_DIR/new-project && npm install 
             
