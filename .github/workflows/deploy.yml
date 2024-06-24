@@ -1,62 +1,36 @@
-name: Deploy Strapi to EC2
+name: Deploy to EC2
 
 on:
   push:
     branches:
-      - main
+      - main  # adjust to your main branch name
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 90
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Setup Node.js and npm
-        uses: actions/setup-node@v2
-        with:
-          node-version: '20'
+    - name: Install dependencies
+      run: npm install  # or yarn install
 
+    - name: Build Strapi app
+      run: npm run build  # or yarn build
 
-
-      - name: Deploy to EC2
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_SSH_KEY }}
-          port: 22
-          script: |
-            sudo apt-get update -y
-            sudo apt-get install -y nodejs npm git
-            
-            REPO_DIR="/home/${{ secrets.EC2_USER }}/Task-2-Pearthought-StrapiApp"
-
-            # Clone or update repository
-            if [ ! -d "$REPO_DIR" ]; then
-              git clone https://github.com/priyanka-1994/Task-2-Pearthought-StrapiApp.git $REPO_DIR
-            else
-              cd $REPO_DIR
-              git fetch --all
-              git reset --hard origin/main
-              git pull origin main
-            fi
-
-            # Remove 'new-strapi' directory if exists and not empty
-            if [ -d "$REPO_DIR/new-project" ]; then
-              rm -rf $REPO_DIR/new-project
-            fi
+    - name: Deploy to EC2
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.EC2_HOST }}
+        username: ${{ secrets.EC2_USERNAME }}
+        key: ${{ secrets.EC2_PRIVATE_KEY }}
+        port: ${{ secrets.EC2_PORT }}  # default SSH port is 22
+        script: |
+          cd /path/to/strapi/app
+          git pull origin main  # ensure latest code
+          npm install --production
+          npm run build
+          pm2 restart ecosystem.config.js  # or your process manager command
 
 
-            # Create new Strapi app in 'new-project' directory
-            cd $REPO_DIR
-            npm install && npm run build
-            yarn global add strapi@latest  # Install Strapi globally
-            strapi new new-project --quickstart
-
-            # Install dependencies for Strapi app
-            #cd $REPO_DIR/new-project && yarn install && yarn develop
