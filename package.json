@@ -31,7 +31,8 @@
     "new-project"
   ],
   "scripts": {
-    "install": "strapi start",
+    "install": "strapi install",
+    "build": "strapi build",
     "develop": "strapi develop",
     "start": "strapi start",
     "build": "nx run-many --target=build --nx-ignore-cycles",
@@ -163,7 +164,8 @@
     "@types/markdown-it": "^12.0.11",
     "pm2": "^5.0.0",
     "strapi": "latest",
-    "typescript": "^4.5.6"
+    "typescript": "^4.5.6",
+    "strapi-admin": "^0.0.0-next.2a816cdadd2ece37767550b2a249c03ef2b53aeb"
   },
   "packageManager": "yarn@4.0.1",
   "engines": {
