@@ -77,7 +77,7 @@ jobs:
              rm -rf new-project
            fi
 
-            npx create-strapi-app new-project --quickstart
+            yarn create strapi-app my-strapi-project --quickstart
             sudo npm install -g strapi@latest
             cd $REPO_DIR/new-project && yarn install
             yarn develop
