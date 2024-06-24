@@ -57,7 +57,10 @@ jobs:
               rm -rf $REPO_DIR/new-project
             fi
             # Create new Strapi app in 'new-project' directory
-            cd $REPO_DIR && yarn install && yarn build
+            cd $REPO_DIR 
+            strapi new new-project --quickstart
+            cd new-project
+            yarn install && yarn develop
             #strapi new new-project --quickstart
             #cd $REPO_DIR/new-project && npm install 
             
