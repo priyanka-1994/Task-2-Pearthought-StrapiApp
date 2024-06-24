@@ -18,16 +18,9 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install dependencies
-        run: yarn install
-        # Or use npm:
-        # run: npm install
+      
 
-      - name: Build Strapi app
-        run: yarn build
-        # Or use npm:
-        # run: npm run build
-
+      
       - name: Clone repository on EC2
         uses: appleboy/ssh-action@master
         with:
