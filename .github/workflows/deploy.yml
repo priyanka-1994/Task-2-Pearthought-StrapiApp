@@ -67,6 +67,7 @@ jobs:
             # Start the Strapi application with pm2
             strapi new priya-project --dbclient=sqlite --dbforce --no-run
             cd priya-project
+            touch yarn.lock
             yarn install
             yarn build
             yarn cache clean
