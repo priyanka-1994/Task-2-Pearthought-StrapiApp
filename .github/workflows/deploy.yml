@@ -44,7 +44,13 @@ jobs:
             sudo apt-get upgrade -y
             
             REPO_DIR="/home/${{ secrets.EC2_USER }}/Task-2-Pearthought-StrapiApp"
+            PROJECT_DIR="$REPO_DIR/priya-project"
             
+            # Remove existing priya-project directory if it exists
+            if [ -d "$PROJECT_DIR" ]; then
+              rm -rf $PROJECT_DIR
+            fi
+
             # Clone or pull the repository
             if [ ! -d "$REPO_DIR" ]; then
               git clone https://github.com/priyanka-1994/Task-2-Pearthought-StrapiApp.git $REPO_DIR
@@ -61,17 +67,21 @@ jobs:
             yarn install
             
             # Build the project (adjust as per your project's setup)
-            yarn build
+            #yarn build
             yarn cache clean
             
-            # Start the Strapi application with pm2
+            # Create and set up priya-project directory
             strapi new priya-project --dbclient=sqlite --dbforce --no-run
             cd priya-project
             touch yarn.lock
             yarn install
             yarn build
             yarn cache clean
+            
+            # Install pm2 globally if not already installed
             sudo npm install -g pm2@latest
+            
+            # Start the Strapi application with pm2
             pm2 start npm --name "strapi" -- run start
             pm2 save  # Save current processes to be restored on server restart
 
