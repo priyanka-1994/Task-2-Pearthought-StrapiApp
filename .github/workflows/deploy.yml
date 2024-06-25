@@ -22,6 +22,13 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '20'  # Ensure Node.js version is compatible with your project
+      
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Strapi
+        run: npm run build
+
 
       # Step 3: Upgrade npm
       - name: Upgrade npm
@@ -44,7 +51,7 @@ jobs:
             sudo apt-get upgrade -y
             
             REPO_DIR="/home/${{ secrets.EC2_USER }}/Task-2-Pearthought-StrapiApp"
-            PROJECT_DIR="$REPO_DIR/priya-project"
+            
             
             # Remove existing priya-project directory if it exists
             if [ -d "$PROJECT_DIR" ]; then
@@ -64,19 +71,19 @@ jobs:
             cd $REPO_DIR
             
             # Install dependencies
-            yarn install
+            #yarn install
             
             # Build the project (adjust as per your project's setup)
-            yarn build
-            yarn cache clean
+            #  yarn build
+            #yarn cache clean
             
             # Create and set up priya-project directory
             #strapi new priya-project --dbclient=sqlite --dbforce --no-run
             cd priya-project
             touch yarn.lock
             yarn install
-            yarn develop
-            
+            #yarn develop
+            yarn build
             # Install pm2 globally if not already installed
             sudo npm install -g pm2@latest
             
