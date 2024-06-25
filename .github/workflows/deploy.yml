@@ -64,19 +64,18 @@ jobs:
             cd $REPO_DIR
             
             # Install dependencies
-            #yarn install
+            yarn install
             
             # Build the project (adjust as per your project's setup)
-            #yarn build
-            #yarn cache clean
+            yarn build
+            yarn cache clean
             
             # Create and set up priya-project directory
             strapi new priya-project --dbclient=sqlite --dbforce --no-run
             cd priya-project
             touch yarn.lock
             yarn install
-            yarn build
-            yarn cache clean
+            
             
             # Install pm2 globally if not already installed
             sudo npm install -g pm2@latest
