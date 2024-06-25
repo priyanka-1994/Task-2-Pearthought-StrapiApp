@@ -64,11 +64,11 @@ jobs:
             cd $REPO_DIR
             
             # Install dependencies
-            yarn install
+            #yarn install
             
             # Build the project (adjust as per your project's setup)
             #yarn build
-            yarn cache clean
+            #yarn cache clean
             
             # Create and set up priya-project directory
             strapi new priya-project --dbclient=sqlite --dbforce --no-run
@@ -82,6 +82,7 @@ jobs:
             sudo npm install -g pm2@latest
             
             # Start the Strapi application with pm2
+            pm2 delete all
             pm2 start npm --name "strapi" -- run start
             pm2 save  # Save current processes to be restored on server restart
 
